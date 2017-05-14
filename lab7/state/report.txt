@@ -1,0 +1,59 @@
+Maria Beatriz Zanardo
+Lab Report
+
+  From the user's perspective, the program starts off by by asking for the name of
+the file. If the the user inputs an invalid file name, an error message is displayed.
+If the user inputs a valid file name, the program continues by displaying a menu of
+6 options. If the user choose an option that doesn't exist, an error message is displayed. If the user chooses the first option, the program displays all states and their 
+abbreviation. If the user chooses the second option, all the information of a given state is displayed. This is done by first displaying a numbered list of all states and asking
+the user to choose the number of the state he or she wishes to see the information. If 
+the user chooses option 3, he or she is prompted to enter a minimum population and the
+program displays all states that have greater than or equal to this number. If the user
+chooses option 4, he or she can choose a minimum number of congress representatives and
+the program displays all states that have at least his given number of congress 
+representatives. If the user chooses option 5, he or she is prompted to chooses a year
+and the program displays all states that became a state in that given year. Finally,
+if the user chooses option 6, the program terminates.
+
+  From the programmer's perspective, the program starts by propting the user to enter the file name and using ifs.open to read this file. If the user enter's an invalide file
+name, the program displays and error message and quits. If the file name is valid, the 
+file is read by using getline and each piece of information in the file is saved to a
+certain variable (ex. capital is saved to the string cap). This is done by using a comma as the delimitor (except for the the number of congress representatives, which is the 
+last piece of information, and thus uses a new line as the delimitor. Next, the last 
+three variables are converted from strings to integers and all information is stored in
+the State class, and the pushback function is used to store the information of each
+state in a list.
+
+  The user is then shown a menu of six options and prompted to choose one. This is done
+through a while loop that runs until the user chooses option 6 (exit) and each option is
+an if statement. If the user chooses an option number other than 1-6, an error message 
+is displayed and the menu is displayed again. The second if statement (option 1) uses a
+function called states to display all state names and their abbreviations in a numbered
+list. This function works by using an iterator to go through the list of states and 
+display all state names and abbreviations (using the methods getStatename() and getAbr())
+ 
+  The second option again uses this function to display all states and prompts the user 
+to enter the number of the state that he or she wishes to see the information. This is 
+done by using the function display2. This function works by advancing and iterator to the element of the user's choice. All information about this given state is displayed by 
+using the get methods of the State class.
+
+  The third option prompts the user to enter a minimum population and uses the function
+minp to display all states that have a population greater than or equal to the given
+number. This function works by using an iterator to go through the vector of States and
+comparing the given population number to the population of each element (ontained using
+getPopulation method). If the population of the state is greater than the given 
+popilation, the state name, abbreviation and population are displayed. A counter i is
+also used to count the number of states that satisfy the given condition. An if statement is used to check if i is equal to zero after the iterator has gone through the whole 
+list. If that is the case, a message is displayed saying that there are no states with 
+the population equal to or greater than the number inputed by the user.
+
+  The fourth option works exactly like the third option, but it instead uses a function
+called minc that compares the number of congress representatives instead of population
+(uses getCongress method).
+
+  The fifth option works very similarly to the previous options but it instead prompts
+the user for an year and displays the names of the states that became a state in that
+give year. This is done through a function called year which uses an iterator to go 
+through the whole list of States and display the name and abbreviation of the states
+that satify the given condition. A counter is used in the same way as in options three
+and four.

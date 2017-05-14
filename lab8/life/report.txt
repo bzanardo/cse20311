@@ -1,0 +1,73 @@
+Maria Beatriz Zanardo
+Lab Report
+
+  From the user's perspective, the program is meant to start off by 
+displaying instructions and a menu of options. If the user enters option a, 
+he or she will enter a coordinate and a new cell will be added (represented 
+as an X in the board). If the user enters option r, he or she will enter the 
+coordinates of the cell they wish to remove. If the user chooses option n, 
+the conditions of the board will be checked and the board will be updated. 
+If the user chooses option p, the game will be played continuously, meaning 
+the state of the board will be continuously (and infinitely) checked and 
+updated. The user can also run the program in the "batch" mode, in which he 
+or she enters the name of a data file in the command line and the program 
+runs that scene continuously (p mode).
+  From the programmer's perspective, the program uses a class lifeboard which
+consists of a two dimensional char array (42x42). In the class implementation,
+borders are added to the edges of the array, and all the other elements are 
+set to blank, as to represent the initial state of the board (all dead cells).
+The main program, life.cpp, starts off by declaring a lifeboard (called a) 
+and displaying to the user the menu options. If option a is chosen, the
+program uses a method function of the lifeboard class called a, which takes
+the coordinates inputed by the user and adds a character X to that coordinate
+in the array which represents the board. It is important to note, that the 
+user's input are taken as column number, then row number (which makes more
+sense if thinking in the xy coordinate system) but in the add method, the
+coordinates are inverted as in 2d arrays, the first index represents rows
+and the second columns. The option r works very similar to option a, but 
+instead it uses the remove method which adds a blank space to the desired
+coordinate.
+  If the user chooses option n, the current board is checked and updated. To
+do this, another method function, called getArr is used. This function copies
+the contents of the Lifeboard array (which is private) into another array, 
+which is passed to the function and therefore can be accessed. This function
+is used twice, so that two arrays that are exactly the same are created 
+(called arr and temp). Then, these two arrays are passed to a function 
+called. This void function works by going through every element of the arr
+array (through two for loops). At every element, the eight elements around
+it are checked to see if they are alive or dead (X or blank). If they are
+alive, a counter called living is incremented. If the element being checked
+is alive as well, this counter is decremented, so that it doesn't count as
+a living neighbor (this is necessary since the two for loops used to check
+the cells around the given element check the condition of the cell itself).
+If the number of "living cells" around the element is more than 3, the same 
+element in the temp array is changed to a blank. If this number is exactly 
+equal to three, the cell is alive and the element is changed to an X. If 
+this number is less than two, the element is dead and is changed to a blank. After each iteration, the living counter is then zeroed and the next element 
+is cchecked. It's important to note that although the elements in the arr 
+array were checked, it was only the corresponding elements in the temp array
+that were changed. Therefore, after checking all elements, the arr array is
+set equal to the temp array. Next, the updated arr array is passed to a 
+method function of the lifeboard class called setLifeboard. This function
+copies the passed array (arr) to the class's private array, thus updating
+the board. The new board is then displayed to the user (using the print method
+function).
+  Option p works exactly like option n but it uses an infinite while loop
+so that the conditions of the board are continuously checked and the updated
+board is displayed. Option p uses the usleep function so that the board
+is not updated too quickly and so the user can see it. The system("clear")
+function is also used so that the user's screen is cleared after each 
+iteration of the loop.
+  The program can also run in the "batch" mode in which a data file is passed
+in the command line. To make this option work, the argv function is used in
+the beginning of the program in order to check is there are more than one
+argument in the command line when the program's executable is run. If it is
+not the case, the program continues to run as previously described 
+(interacctive mode). If, however, more than one argument is passed in the
+command line, the program uses ifstream to open the data file and the >>
+operator to extract which option command to run. A while loop is used so
+that the file is read until the command "p" is found. The program then runs
+exactly like previously described, but for each comman using the ifs >>
+command instead of cin. When the whole file is read and all commands are 
+executed, the program then runs the p command, in which the board is 
+continuously checked and updated.

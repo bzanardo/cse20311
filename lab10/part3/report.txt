@@ -1,0 +1,22 @@
+Maria Beatriz Zanardo
+Lab 10 Report
+
+From the user's perspective, the program displays a red, spinning wheel 
+(supposed to represent a ferris wheel). When the user clicks, the wheel
+starts spinning in the opposite direction. If the user clicks again, the
+wheel changes direction again. If the user presses q, the program quits.
+
+From the programmer's perspective, the program starts off by opening a
+700x600 window (using gfx_open()) with a blue background. The program uses
+a while loop that runs until the user presses q. Inside the while loop, a 
+red cricle and a line below it are drawn. In each iteration of the loop, 
+gfx_flush() and gfx_clear() are used to clear the screen and make sure that 
+the animation looks good. Three different lines are drawn inside the circle. 
+Each line makes an angle of π/3 with the previous line (0, π/3 and 2π/3). 
+At each iteration of the loop the angles of each line are increased by π/6 
+and the lines are redrawn, thus giving the impression that the circle is 
+rotating. The usleep function is used to slow down the animation. An if 
+statement is used to check if the user clicked (using the gfx_even_waiting 
+function). If this if statement is true, the program enters another while loop that runs until the user clicks again (!gfx_event_waiting). Inside this 
+second while loop, the same lines are drawn but at each iteration, the angles are decremented, thus giving the impression that the circle is rotating in the opposite direction. An if statement is used inside the second while loop to 
+check if q has been pressed, so that the animation doesn't get stuck when the user wishes to quit the program. 
