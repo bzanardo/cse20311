@@ -1,0 +1,66 @@
+Maria Beatriz Zanardo
+Final Project Report
+
+From the user's perspective, the program starts off by displaying the rules of 
+the game. After pressing enter (as instructed) the game starts and a ball starts
+moving across the screen. The ball bounces off the top and bottom walls, and
+off the paddles. The left paddle can be moved up or down using the w and s
+keys while the right paddle can be moved using the u and j keys. If the 
+player fails to move the paddle to the correct position and the ball passes
+through the right or left wall, the opposing player scores a point. The
+game pauses momentarily to display who scored, but can be resumed by pressing
+any key (or moving the mouse). At the top of the screen, the score of each
+player is kept and is updated after the game resumes. The game can be quit
+by pressing q.
+
+From the programmer's perspective, in the main program, the gfxnew library is
+used to open a window and animate a ball bouncing across the screen. The
+program runs under a while loop that only breaks if the user presses the
+q key. Before the game starts, the instructions are displayed to the user
+(using gfx_text) and remain on screen until the user presses enter. This is
+done using the gfx_wait function.
+ 
+A class was created to represent the paddles. This class (called paddle)
+has as private attributes the integers x, y1, and y2 which represent the x and
+y position of the paddle (since it's only a vertical line, only y changes). 
+This class also has the method  setPaddle, which takes in three integers and 
+set them equal to the private attribute, and the display function which draws 
+a line between (x,y1) and (x,y2). The move method is responsible for moving 
+the paddles up and down. It takes in a double, which represents the rate of 
+change and subtracts that value from y2 and y1, making the line move upwards. 
+For the line to move downwards, a negative number has to be passed to the move 
+method. The paddle class also has the getx, gety1 and gety2 methods that are 
+responsible for giving access to the private attributes.
+
+In the main program, these access methods are used to determine the position
+of the paddles at all times. Therefore, when the center of the ball (minus
+the radius) is equal to the position of the paddle, it bounces off (by taking
+the negative of the x-component of the velocity of the ball). Similarly, 
+when the ball touches the top or bottom wall, it also bounces off (negative of
+y component of velocity.) 
+
+If at any point the position of the ball is past the right or left walls (or the
+paddles), the opposing player scores a point. If the ball goes past paddle a
+(into left wall), a counter called iScoreB is incremented by one. The current
+value of this counter is then converted into a C++ string (using the to_string
+function) which is then converted into a C string. This C string is continuously
+displayed at the top of the screen and is updated every time player B scores a
+point. Before the game resumes, a text is displayed saying which player scored.
+The game only restarts after some key is pressed or the mouse moved (using 
+gfx_wait). The ball is then positioned at the center of the screen and given
+an initial velocity in the opposite direction of the player who scored (i.e if
+player B scored, the ball will go in the direction of paddle A). The process is
+the exact same if the ball goes past paddle b, except iScoreA is incremented.
+
+The move method is used to give the user control of the position of the paddle.
+This is done by using the gfx_event_waiting() function (which determines if 
+the user is actually pressing some key) and the gfx_wait() function (which 
+determines which key is being pressed). If c (the variable used for gfx_wait) 
+is equal to the 'w' key, the left paddle (a) is moved up at a rate of 30 
+(using the move method). If the 's' key is pressed, the paddle is moved down 
+at the same speed (-30). Similarly, if 'u' is pressed, the right paddle (b) 
+moves up at a rate of 30. If 'j' is pressed, paddle b moves down at the same 
+rate.
+
+
+
